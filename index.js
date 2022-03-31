@@ -1,12 +1,14 @@
 import path from "path";
 import { readFileSync } from "fs";
-import diff from "./utils.js";
+import { diff, getType } from "./utils.js";
 import parsers from "./parsers/parsers.js";
 
-export default (first, second, format = parsers.json) => {
+export default (first, second, format = 'json') => {
   const firstFile = readFileSync(path.resolve(first), "utf-8");
   const secondFile = readFileSync(path.resolve(second), "utf-8");
-  const firstParsed = format(firstFile);
-  const secondParsed = format(secondFile);
+  const firstFileType = getType(first);
+  const secondFileType = getType(second);
+  const firstParsed = parsers[firstFileType](firstFile);
+  const secondParsed = parsers[secondFileType](secondFile);
   diff(firstParsed, secondParsed);
 };
