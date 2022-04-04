@@ -4,8 +4,7 @@
   "description": "[![Actions Status](https://github.com/AngelAzrail/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/AngelAzrail/frontend-project-lvl2/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch .test.js$",
-    "coverage": "jest -- --coverage"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

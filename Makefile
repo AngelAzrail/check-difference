@@ -3,4 +3,4 @@ lint:
 test:
 	npm test
 test-coverage:
-	npm coverage
+	npm test -- --coverage

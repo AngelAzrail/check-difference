@@ -1,6 +1,6 @@
 import { diff } from "../utils.js";
-import { right, wrong1, wrong2 } from "./__fixtures__/json-completed.js";
-import { file1, file2 } from "./__fixtures__/parsed.js";
+import { right, wrong1, wrong2 } from "../__fixtures__/json-completed.js";
+import { file1, file2 } from "../__fixtures__/parsed.js";
 
 describe("json tests", () => {
   let difference;
