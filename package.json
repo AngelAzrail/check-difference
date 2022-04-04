@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch .test.js$",
-    "coverage": "jest --coverage --watch .test.js$"
+    "coverage": "jest -- --coverage"
   },
   "repository": {
     "type": "git",
