@@ -16,7 +16,6 @@ export const diff = (initial, performed) => {
     }
   });
   result += "}";
-  // console.log(result);
   return result;
 };
 
