@@ -14,8 +14,8 @@ program.argument("<filepath1>").argument("<filepath2>");
 
 program.option("-f, --format <type>", "output format");
 
-program.action((first, second) => {
-  genDiff(first, second);
+program.action((first, second, opts) => {
+  genDiff(first, second, opts?.format ? opts.format : 'json');
 });
 
 program.parse();
