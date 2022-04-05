@@ -1,4 +1,5 @@
 import _ from "lodash";
+import path from "path";
 import { formatOutput } from "./format-output.js";
 
 export const diff = (initial, performed, format) => {
@@ -21,6 +22,6 @@ export const diff = (initial, performed, format) => {
 };
 
 export const getType = (filePath) => {
-  const res = filePath.split(".");
-  return res.length > 1 ? res.pop() : "";
+  const type = path.extname(filePath);
+  return type ? type.slice(1) : type;
 };
