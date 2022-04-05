@@ -1,22 +1,22 @@
 export const statusesMap = {
   added: {
-    json: "+",
+    stylish: "+",
   },
   removed: {
-    json: "-",
+    stylish: "-",
   },
   initial: {
-    json: " ",
+    stylish: " ",
   },
 };
 
-export const jsonFormat = (status, key, value) =>
-  ` ${statusesMap[status].json} ${key}: ${value}\n`;
+export const stylishFormat = (status, key, value, hasParent) =>
+  ` ${' '.repeat(hasParent)}${statusesMap[status].stylish} ${key}: ${value}\n`;
 
 export const formatsMap = {
-  json: jsonFormat,
+  stylish: stylishFormat,
 };
 
-export const formatOutput = (status, format, key, value) => {
-  return formatsMap[format](status, key, value);
+export const formatOutput = (status, format, key, value, hasParent) => {
+  return formatsMap[format](status, key, value, hasParent);
 };
