@@ -11,12 +11,11 @@ export const statusesMap = {
 };
 
 export const stylishFormat = (status, key, value, hasParent) =>
-  ` ${' '.repeat(hasParent)}${statusesMap[status].stylish} ${key}: ${value}\n`;
+  ` ${" ".repeat(hasParent)}${statusesMap[status].stylish} ${key}: ${value}\n`;
 
 export const formatsMap = {
   stylish: stylishFormat,
 };
 
-export const formatOutput = (status, format, key, value, hasParent) => {
-  return formatsMap[format](status, key, value, hasParent);
-};
+export const formatOutput = (status, format, key, value, hasParent) =>
+  formatsMap[format](status, key, value, hasParent);

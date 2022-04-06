@@ -5,7 +5,7 @@ import { file1, file2 } from "../__fixtures__/parsed.js";
 describe("json tests", () => {
   let difference;
   beforeAll(() => {
-    difference = diff(file1, file2);
+    difference = diff(file1, file2, 'stylish', 0);
   });
 
   test("right test", () => {
