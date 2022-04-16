@@ -8,9 +8,9 @@ export const output = (status, str, key, format, depth) => {
   else {
     result += nestedBeginning(status, key, depth);
     Object.entries(str).forEach(([name, value]) => {
-      result += output("initial", value, name, format, depth + 2);
+      result += output("initial", value, name, format, depth + 4);
     });
-    result += `${' '.repeat(depth + 2)}}\n`;
+    result += ` ${' '.repeat(depth + 2)}}\n`;
   }
   return result;
 };
