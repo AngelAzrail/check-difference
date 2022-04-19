@@ -22,19 +22,20 @@ const plain = (tree, path = null) =>
             node.status,
             node.value,
             newPath
-          )} with value: ${isNested(node.value)}\n`;
+          )} with value: ${isNested(node.value)}`;
         case "deleted":
-          return `${plainFormat(node.status, node.value, newPath)}.\n`;
+          return `${plainFormat(node.status, node.value, newPath)}.`;
         case "updated":
           return `${plainFormat(
             node.status,
             node.value,
             newPath
-          )}. From ${isNested(node.value)} to ${isNested(node.nextValue)}\n`;
+          )}. From ${isNested(node.value)} to ${isNested(node.nextValue)}`;
         default:
           return "";
       }
     })
-    .join("");
+    .filter((item) => item)
+    .join("\n");
 
 export default plain;
