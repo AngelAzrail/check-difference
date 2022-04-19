@@ -10,7 +10,8 @@ export const isNested = (value) =>
 const plain = (tree, path = null) =>
   tree
     .map((node) => {
-      const newPath = path ? [path, node.key].join(".") : node.key;
+        console.log(node);
+        const newPath = path ? [path, node.key].join(".") : node.key;
       if (node.status === "hasChildren") {
         return plain(node.value, newPath);
       }
@@ -21,7 +22,7 @@ const plain = (tree, path = null) =>
             node.value,
             newPath
           )} with value: ${isNested(node.value)}\n`;
-        case "removed":
+        case "deleted":
           return `${plainFormat(node.status, node.value, newPath)}.\n`;
         case "updated":
           return `${plainFormat(
