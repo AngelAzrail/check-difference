@@ -1,22 +1,47 @@
 import path from "path";
 import { readFileSync } from "fs";
-import { diff, getType } from "./utils.js";
+import _ from "lodash";
+import { getType } from "./utils.js";
 import parsers from "./parsers/parsers.js";
-import { formatsMap } from "./format-output.js";
+import formatters from "./formatters/index.js";
 
-export const prepare = (first, second, format) => {
-  if (!formatsMap[format])
-    return "Данный формат вывода не поддерживается";
-  const firstFileType = getType(first);
-  const secondFileType = getType(second);
+export const node = (status, key, value, nextValue = null) => ({
+  status,
+  key,
+  value,
+  nextValue,
+});
+
+export const tree = (initial, performed) => {
+  const allKeys = _.union(_.keys(initial), _.keys(performed)).sort();
+  return allKeys.map((key) => {
+    const initialHasKey = _.has(initial, key);
+    const performedHasKey = _.has(performed, key);
+    if (initialHasKey && performedHasKey) {
+      if (_.isObject(initial[key]) && _.isObject(performed[key])) {
+        return node("hasChildren", key, tree(initial[key], performed[key]));
+      }
+      if (initial[key] === performed[key]) {
+        return node("initial", key, initial[key]);
+      }
+      return node("updated", key, initial[key], performed[key]);
+    }
+    return !initialHasKey
+      ? node("added", key, performed[key])
+      : node("deleted", key, initial[key]);
+  });
+};
+
+const gendiff = (initial, performed, format) => {
+  const firstFileType = getType(initial);
+  const secondFileType = getType(performed);
   if (!firstFileType || !secondFileType) return "Невозможно прочитать файлы(ы)";
-  const firstFile = readFileSync(path.resolve(first), "utf-8");
-  const secondFile = readFileSync(path.resolve(second), "utf-8");
+  const firstFile = readFileSync(path.resolve(initial), "utf-8");
+  const secondFile = readFileSync(path.resolve(performed), "utf-8");
   const firstParsed = parsers[firstFileType](firstFile);
   const secondParsed = parsers[secondFileType](secondFile);
-  return diff(firstParsed, secondParsed, format);
+  const statusTree = tree(firstParsed, secondParsed);
+  return formatters(statusTree, format);
 };
 
-export default (first, second, format) => {
-  console.log(prepare(first, second, format));
-};
+export default gendiff;
