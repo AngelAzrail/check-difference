@@ -1,7 +1,7 @@
 import path from "path";
 import { readFileSync } from "fs";
 import _ from "lodash";
-import { getType } from "../utils.js";
+import { getType } from "./utils.js";
 import parsers from "./parsers/parsers.js";
 import formatters from "./formatters/index.js";
 
@@ -32,7 +32,7 @@ export const tree = (initial, performed) => {
   });
 };
 
-const gendiff = (initial, performed, format) => {
+const gendiff = (initial, performed, format = 'stylish') => {
   const firstFileType = getType(initial);
   const secondFileType = getType(performed);
   if (!firstFileType || !secondFileType) return "Невозможно прочитать файлы(ы)";

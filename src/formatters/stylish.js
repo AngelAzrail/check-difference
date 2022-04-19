@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { statusesMap } from "../../utils.js";
+import { statusesMap } from "../utils.js";
 
 export const stylishFormat = (status, key, value, depth) => {
   if (_.isObject(value)) {
