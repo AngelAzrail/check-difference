@@ -10,7 +10,6 @@ export const isNested = (value) =>
 const plain = (tree, path = null) =>
   tree
     .map((node) => {
-        console.log(node);
         const newPath = path ? [path, node.key].join(".") : node.key;
       if (node.status === "hasChildren") {
         return plain(node.value, newPath);
