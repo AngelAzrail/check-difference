@@ -1,7 +1,7 @@
 import path from "path";
 import { readFileSync } from "fs";
 import _ from "lodash";
-import { getType } from "./utils.js";
+import { getType } from "../utils.js";
 import parsers from "./parsers/parsers.js";
 import formatters from "./formatters/index.js";
 
@@ -19,7 +19,7 @@ export const tree = (initial, performed) => {
     const performedHasKey = _.has(performed, key);
     if (initialHasKey && performedHasKey) {
       if (_.isObject(initial[key]) && _.isObject(performed[key])) {
-        return node("hasChildren", key, tree(initial[key], performed[key]));
+        return node("hasChildren", key, tree(initial[key], performed[key]))
       }
       if (initial[key] === performed[key]) {
         return node("initial", key, initial[key]);

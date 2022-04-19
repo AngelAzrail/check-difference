@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { statusesMap } from "../utils.js";
+import { statusesMap } from "../../utils.js";
 
 export const plainFormat = (status, value, path) =>
   `Property '${path}' was ${statusesMap[status].plain}`;

@@ -1,4 +1,4 @@
-import { getType } from "../utils.js";
+import { getType } from "../../utils.js";
 
 describe("getType func tests", () => {
   const paths = [
