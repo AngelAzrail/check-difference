@@ -1,14 +1,38 @@
 import _ from "lodash";
+import { statusesMap } from "../utils.js";
 
-const plain = (initial, performed, path = "") => {
-  const allKeys = _.union(_.keys(initial), _.keys(performed)).sort();
-  let result = "";
-  allKeys.forEach((key) => {
-    if (_.isObject(initial[key]) && _.isObject(performed[key]))
-      result += plain(initial[key], performed[key], path ? `${path}.${key}` : key);
-  else result += `Property '${path ? `${path}.${key}` : key}' changed from ${initial[key]} to ${performed[key]}\n`;
-  });
-  return result;
-};
+export const plainFormat = (status, value, path) =>
+  `Property '${path}' was ${statusesMap[status].plain}`;
+
+export const isNested = (value) =>
+  _.isObject(value) ? "[complex_value]" : `'${value}'`;
+
+const plain = (tree, path = null) =>
+  tree
+    .map((node) => {
+      const newPath = path ? [path, node.key].join(".") : node.key;
+      if (node.status === "hasChildren") {
+        return plain(node.value, newPath);
+      }
+      switch (node.status) {
+        case "added":
+          return `${plainFormat(
+            node.status,
+            node.value,
+            newPath
+          )} with value: ${isNested(node.value)}\n`;
+        case "removed":
+          return `${plainFormat(node.status, node.value, newPath)}.\n`;
+        case "updated":
+          return `${plainFormat(
+            node.status,
+            node.value,
+            newPath
+          )}. From ${isNested(node.value)} to ${isNested(node.nextValue)}\n`;
+        default:
+          return "";
+      }
+    })
+    .join("");
 
 export default plain;

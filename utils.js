@@ -8,17 +8,22 @@ export const getType = (filePath) => {
 export const statusesMap = {
   added: {
     stylish: "+ ",
+    plain: "added",
   },
   deleted: {
     stylish: "- ",
+    plain: "removed",
   },
   initial: {
     stylish: "  ",
+    plain: "",
   },
   updated: {
     stylish: "  ",
+    plain: "updated",
   },
   hasChildren: {
     stylish: "  ",
+    plain: "",
   },
 };
