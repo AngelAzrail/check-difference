@@ -6,8 +6,8 @@ export const plainFormat = (status, value, path) =>
 
 export const isNested = (value) =>
   _.isObject(value)
-    ? "[complex_value]"
-    : `${typeof value === "string" ? `'${value}'` : value} `;
+    ? "[complex value]"
+    : `${typeof value === "string" ? `'${value}'` : value}`;
 
 const plain = (tree, path = null) =>
   tree
@@ -24,7 +24,7 @@ const plain = (tree, path = null) =>
             newPath
           )} with value: ${isNested(node.value)}`;
         case "deleted":
-          return `${plainFormat(node.status, node.value, newPath)}.`;
+          return `${plainFormat(node.status, node.value, newPath)}`;
         case "updated":
           return `${plainFormat(
             node.status,
