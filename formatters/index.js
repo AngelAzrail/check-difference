@@ -9,6 +9,9 @@ export default (tree, format) => {
     case "plain": {
       return plain(tree);
     }
+    case "json": {
+      return JSON.stringify(tree);
+    }
     default:
       return null;
   }
