@@ -1,41 +1,41 @@
-import _ from "lodash";
-import { statusesMap } from "../utils.js";
+import _ from 'lodash';
+import { statusesMap } from '../utils.js';
 
 export const plainFormat = (status, value, path) =>
   `Property '${path}' was ${statusesMap[status].plain}`;
 
 export const isNested = (value) =>
   _.isObject(value)
-    ? "[complex value]"
-    : `${typeof value === "string" ? `'${value}'` : value}`;
+    ? '[complex value]'
+    : `${typeof value === 'string' ? `'${value}'` : value}`;
 
 const plain = (tree, path = null) =>
   tree
     .map((node) => {
-      const newPath = path ? [path, node.key].join(".") : node.key;
-      if (node.status === "hasChildren") {
+      const newPath = path ? [path, node.key].join('.') : node.key;
+      if (node.status === 'hasChildren') {
         return plain(node.value, newPath);
       }
       switch (node.status) {
-        case "added":
+        case 'added':
           return `${plainFormat(
             node.status,
             node.value,
-            newPath
+            newPath,
           )} with value: ${isNested(node.value)}`;
-        case "deleted":
+        case 'deleted':
           return `${plainFormat(node.status, node.value, newPath)}`;
-        case "updated":
+        case 'updated':
           return `${plainFormat(
             node.status,
             node.value,
-            newPath
+            newPath,
           )}. From ${isNested(node.value)} to ${isNested(node.nextValue)}`;
         default:
-          return "";
+          return '';
       }
     })
     .filter((item) => item)
-    .join("\n");
+    .join('\n');
 
 export default plain;

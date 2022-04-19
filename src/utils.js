@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 
 export const getType = (filePath) => {
   const type = path.extname(filePath);
@@ -7,23 +7,23 @@ export const getType = (filePath) => {
 
 export const statusesMap = {
   added: {
-    stylish: "+ ",
-    plain: "added",
+    stylish: '+ ',
+    plain: 'added',
   },
   deleted: {
-    stylish: "- ",
-    plain: "removed",
+    stylish: '- ',
+    plain: 'removed',
   },
   initial: {
-    stylish: "  ",
-    plain: "",
+    stylish: '  ',
+    plain: '',
   },
   updated: {
-    stylish: "  ",
-    plain: "updated",
+    stylish: '  ',
+    plain: 'updated',
   },
   hasChildren: {
-    stylish: "  ",
-    plain: "",
+    stylish: '  ',
+    plain: '',
   },
 };
