@@ -14,12 +14,12 @@ export const node = (status, key, value, nextValue = null) => ({
 
 export const tree = (initial, performed) => {
   const allKeys = _.union(_.keys(initial), _.keys(performed));
-  return allKeys.sort().map((key) => {
+  return _.sort(allKeys).map((key) => {
     const initialHasKey = _.has(initial, key);
     const performedHasKey = _.has(performed, key);
     if (initialHasKey && performedHasKey) {
       if (_.isObject(initial[key]) && _.isObject(performed[key])) {
-        return node('hasChildren', key, tree(initial[key], performed[key]))
+        return node('hasChildren', key, tree(initial[key], performed[key]));
       }
       if (initial[key] === performed[key]) {
         return node('initial', key, initial[key]);

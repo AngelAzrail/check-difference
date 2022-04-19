@@ -1,2 +1,1 @@
-
 describe('gendiff tests', () => {});

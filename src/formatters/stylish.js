@@ -26,13 +26,14 @@ const stylish = (tree, depth = 0) => {
           + stylishFormat('added', node.key, node.nextValue, spaces)
         );
       }
-      if (node.status === 'hasChildren')
-        return stylishFormat(
-          node.status,
-          node.key,
-          stylish(node.value, spaces + 2),
-          spaces,
-        );
+      if (node.status === 'hasChildren') {
+          return stylishFormat(
+              node.status,
+              node.key,
+              stylish(node.value, spaces + 2),
+              spaces,
+          );
+      }
       return stylishFormat(node.status, node.key, node.value, spaces);
     })
     .join('');

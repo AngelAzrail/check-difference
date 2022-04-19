@@ -24,3 +24,5 @@ rules:
         - single
     comma-dangle:
         - error
+    semi:
+        - error

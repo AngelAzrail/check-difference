@@ -1,16 +1,16 @@
 import _ from 'lodash';
 import { statusesMap } from '../utils.js';
 
-export const plainFormat = (status, value, path) =>
-  `Property '${path}' was ${statusesMap[status].plain}`;
+export const plainFormat = (status, value, path) => `Property '${path}' was ${statusesMap[status].plain}`;
 
-export const isNested = (value) =>
-  _.isObject(value)
-    ? '[complex value]'
-    : `${typeof value === 'string' ? `'${value}'` : value}`;
+export const isNested = (value) => {
+    if (_.isObject(value)) {
+        return '[complex value]';
+    }
+    return `${typeof value === 'string' ? `'${value}'` : value}`;
+}
 
-const plain = (tree, path = null) =>
-  tree
+const plain = (tree, path = null) => tree
     .map((node) => {
       const newPath = path ? [path, node.key].join('.') : node.key;
       if (node.status === 'hasChildren') {
