@@ -5,12 +5,14 @@ export const plainFormat = (status, value, path) =>
   `Property '${path}' was ${statusesMap[status].plain}`;
 
 export const isNested = (value) =>
-  _.isObject(value) ? "[complex_value]" : `'${value}'`;
+  _.isObject(value)
+    ? "[complex_value]"
+    : `${typeof value === "string" ? `'${value}'` : value} `;
 
 const plain = (tree, path = null) =>
   tree
     .map((node) => {
-        const newPath = path ? [path, node.key].join(".") : node.key;
+      const newPath = path ? [path, node.key].join(".") : node.key;
       if (node.status === "hasChildren") {
         return plain(node.value, newPath);
       }
