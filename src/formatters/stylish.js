@@ -13,7 +13,7 @@ export const stylishFormat = (status, key, value, depth) => {
       depth,
     );
   }
-  return `${' '.repeat(depth)}${statusesMap[status].stylish}${key}: ${value}\n`;
+  return `${' '.repeat(depth)}${statusesMap[status].stylish}${key}:${value !== '' ? ' ' : ''}${value}\n`;
 };
 
 const stylish = (tree, depth = 0) => {
