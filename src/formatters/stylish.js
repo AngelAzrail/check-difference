@@ -27,12 +27,12 @@ const stylish = (tree, depth = 0) => {
         );
       }
       if (node.status === 'hasChildren') {
-          return stylishFormat(
-              node.status,
-              node.key,
-              stylish(node.value, spaces + 2),
-              spaces,
-          );
+        return stylishFormat(
+          node.status,
+          node.key,
+          stylish(node.value, spaces + 2),
+          spaces,
+        );
       }
       return stylishFormat(node.status, node.key, node.value, spaces);
     })

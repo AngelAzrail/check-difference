@@ -26,3 +26,6 @@ rules:
         - error
     semi:
         - error
+    indent:
+        - error
+        - 2

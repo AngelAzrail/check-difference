@@ -13,7 +13,7 @@ export const node = (status, key, value, nextValue = null) => ({
 });
 
 export const tree = (initial, performed) => {
-  const allKeys = _.union(_.keys(initial), _.keys(performed)).slice().sort();
+  const allKeys = _.union(_.keys(initial), _.keys(performed)).slice();
   return allKeys.map((key) => {
     const initialHasKey = _.has(initial, key);
     const performedHasKey = _.has(performed, key);
