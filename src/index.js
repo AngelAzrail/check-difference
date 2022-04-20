@@ -14,7 +14,7 @@ export const node = (status, key, value, nextValue = null) => ({
 
 export const tree = (initial, performed) => {
   const allKeys = _.union(_.keys(initial), _.keys(performed)).slice();
-  return allKeys.map((key) => {
+  return _.sortBy(allKeys.map((key) => {
     const initialHasKey = _.has(initial, key);
     const performedHasKey = _.has(performed, key);
     if (initialHasKey && performedHasKey) {
@@ -29,7 +29,7 @@ export const tree = (initial, performed) => {
     return !initialHasKey
       ? node('added', key, performed[key])
       : node('deleted', key, initial[key]);
-  });
+  }), 'key');
 };
 
 const gendiff = (initial, performed, format = 'stylish') => {
