@@ -1,5 +1,5 @@
 {
-  "name": "angelarail-check-difference",
+  "name": "azrail-check-difference",
   "version": "1.0.0",
   "description": "Compare two files and find a differences",
   "main": "src/index.js",
