@@ -4,7 +4,7 @@
 
 ### Install
 ``` 
-npm i -g angelazrail-check-difference
+npm i -g azrail-check-difference
 ``` 
 
 ### Usage
